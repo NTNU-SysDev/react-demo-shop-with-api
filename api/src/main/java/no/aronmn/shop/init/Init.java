@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * CommandLineRunner-classes are used to define tasks to be performed on startup
+ */
 @Configuration
 public class Init implements CommandLineRunner {
 
@@ -16,6 +19,10 @@ public class Init implements CommandLineRunner {
         this.productRepository = productRepository;
     }
 
+    /**
+     * This code will be initialized when the Spring Boot application is launched. It imports pre-defined data
+     * @param args
+     */
     @Override
     public void run(String... args) {
         // Cleanup database

@@ -22,6 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 @RequestMapping(value = "product")
+/**
+ * Product management API. This class describes the different REST API endpoints.
+ * @GetMapping means that the method responds to HTTP GET request,
+ * @PostMapping responds to HTTP POST request
+ * @DeleteMapping responds to HTTP DELETE request
+ */
 public class ProductController {
 
     private final ProductRepository productRepository;
@@ -31,13 +37,22 @@ public class ProductController {
         this.productRepository = productRepository;
     }
 
+    /**
+     * Get a list of all products stored in the system
+     * @return
+     */
     @GetMapping
     public ResponseEntity<List<Product>> getAll() {
         return new ResponseEntity<>(this.productRepository.findAll(), HttpStatus.OK);
     }
 
+    /**
+     * Add a product to the database. The product details must be included in the request body, encoded in JSON format
+     * @param httpEntity HTTP request
+     * @return HTTP OK on success, a surprise on error :)
+     */
     @PostMapping
-    public ResponseEntity<Void> deleteProduct(HttpEntity<String> httpEntity) {
+    public ResponseEntity<Void> addProduct(HttpEntity<String> httpEntity) {
         String body = httpEntity.getBody();
         if (body != null) {
             JSONObject jsonObject = new JSONObject(body);
@@ -54,6 +69,11 @@ public class ProductController {
 
     }
 
+    /**
+     * Get one specific product
+     * @param id ID of the product to look up
+     * @return The product or HTTP 404 Not found if a product with provided ID is not found
+     */
     @GetMapping(value = "{id}")
     public ResponseEntity<Optional<Product>> getProduct(@PathVariable("id") Long id) {
         Optional<Product> product = this.productRepository.findById(id);
@@ -64,6 +84,11 @@ public class ProductController {
         }
     }
 
+    /**
+     * Delete a specific product
+     * @param id ID of the product to delete
+     * @return Always returns HTTP OK, even if the product is not found
+     */
     @DeleteMapping(value = "{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable("id") Long id) {
         this.productRepository.deleteById(id);
