@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import Card from "../../components/Card/Card";
+import {API_URL} from "../../config";
 
 export default function Home() {
   const [data, setData] = React.useState([]);
@@ -8,14 +9,14 @@ export default function Home() {
   // const products = useSelector(state => state.products);
 
   function loadData() {
-    fetch("http://localhost:8080/product", {
+    fetch(API_URL + "/product", {
       method: "GET"
     }).then(function (response) {
       return response.json();
     }).then(function (json) {
       setData(json);
     }).catch(function (err) {
-      alert("ERROR:", err);
+      alert("ERROR:" + err);
     });
   }
 
@@ -24,12 +25,12 @@ export default function Home() {
   }, []);
 
   function handleDelete(id) {
-    fetch(`http://localhost:8080/product/${id}`, {
+    fetch(API_URL + `/product/${id}`, {
       method: "DELETE"
     }).then(function() {
       loadData();
     }).catch(function (error) {
-      alert("ERROR:", error);
+      alert("ERROR:" + error);
     });
   }
 

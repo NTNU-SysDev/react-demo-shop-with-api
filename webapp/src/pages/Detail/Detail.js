@@ -2,6 +2,7 @@ import React from "react";
 // import { useSelector } from "react-redux";
 
 import { useParams } from "react-router-dom";
+import {API_URL} from "../../config";
 
 export default function Detail() {
   const [product, setProduct] = React.useState(null);
@@ -15,14 +16,14 @@ export default function Detail() {
 
   React.useEffect(() => {
 
-    fetch(`http://localhost:8080/product/${id}`, {
+    fetch(API_URL + `/product/${id}`, {
       method: "GET"
     }).then(function (response) {
       return response.json();
     }).then(function (json) {
       setProduct(json);
     }).catch(function (err) {
-      alert("ERROR:", err);
+      alert("ERROR:" + err);
     });
 
 

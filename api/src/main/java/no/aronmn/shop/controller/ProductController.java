@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value = "product")
+@RequestMapping(value = "/api/product")
 /**
  * Product management API. This class describes the different REST API endpoints.
  * @GetMapping means that the method responds to HTTP GET request,

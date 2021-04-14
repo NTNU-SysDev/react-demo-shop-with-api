@@ -2,6 +2,7 @@ import React from "react";
 // import { useSelector, useDispatch } from "react-redux";
 // import { setProducts } from "../../store/actions/dataActions";
 import { useHistory } from "react-router-dom";
+import {API_URL} from "../../config";
 
 export default function NewProduct() {
   const [name, setName] = React.useState("");
@@ -24,7 +25,7 @@ export default function NewProduct() {
       price: parseInt(price),
     };
 
-    fetch("http://localhost:8080/product", {
+    fetch(API_URL + "/product", {
       method: "POST",
       body: JSON.stringify(newProduct)
     }).then(function () {
