@@ -1,17 +1,11 @@
 import React from "react";
-// import { useSelector, useDispatch } from "react-redux";
-// import { setProducts } from "../../store/actions/dataActions";
 import { useHistory } from "react-router-dom";
 import {API_URL} from "../../config";
 
 export default function NewProduct() {
   const [name, setName] = React.useState("");
   const [description, setDescription] = React.useState("");
-  const [price, setPrice] = React.useState(0);
-  // const [id, setId] = React.useState("");
-
-  // const dispatch = useDispatch();
-  // const products = useSelector((state) => state.products);
+  const [price, setPrice] = React.useState(10);
 
   // Use react router history hook to push new path
   const history = useHistory();
@@ -25,16 +19,17 @@ export default function NewProduct() {
       price: parseInt(price),
     };
 
-    fetch(API_URL + "/product", {
+    fetch(API_URL + "/products", {
       method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(newProduct)
     }).then(function () {
       history.push("/");
     }).catch(function (error) {
       alert("ERROR:", error);
     })
-
-    // dispatch(setProducts([...products, newProduct]));
   }
 
   return (
@@ -69,15 +64,6 @@ export default function NewProduct() {
           className="form-control"
         />
       </div>
-      {/* <div className="mb-3">
-        <label className="form-label">Id</label>
-        <input
-          onChange={(e) => setId(e.target.value)}
-          value={id}
-          type="text"
-          className="form-control"
-        />
-      </div> */}
       <button type="submit" className="btn btn-primary">
         Submit
       </button>
