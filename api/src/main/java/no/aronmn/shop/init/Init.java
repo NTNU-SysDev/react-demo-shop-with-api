@@ -21,6 +21,7 @@ public class Init implements CommandLineRunner {
 
     /**
      * This code will be initialized when the Spring Boot application is launched. It imports pre-defined data
+     *
      * @param args
      */
     @Override
@@ -29,8 +30,8 @@ public class Init implements CommandLineRunner {
         this.productRepository.deleteAll();
 
         // Add dummy data
-        this.productRepository.save(new Product("Green t-shirt", "Some green t-shirt", 200));
-        this.productRepository.save(new Product("Blue Jeans", "Random blue jeans", 250));
-        this.productRepository.save(new Product("Shoes", "Shoe pair from Nike", 500));
+        this.productRepository.save(new Product("Green t-shirt", "Some green t-shirt", 200, "https://datakomm.work/images/green_tshirt.jpg"));
+        this.productRepository.save(new Product("Blue Jeans", "Random blue jeans", 250, "https://datakomm.work/images/jeans.jpg"));
+        this.productRepository.save(new Product("Shoes", "Shoe pair from Nike", 500, "https://datakomm.work/images/nike_shoes.jpg"));
     }
 }
